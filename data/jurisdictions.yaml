@@ -1,0 +1,478 @@
+# Jurisdiction comparison for a new deposit-funded digital consumer lender ("Bank X"), team based in Riga.
+# Scores are 1 (weak) to 5 (strong) for the bank, NOT for the country in general.
+# Every score has a rationale and at least one source, or needs_check: true when the evidence is thin.
+# Change weights or scores here, then run: python run.py
+
+title: Where to license a new digital bank in the euro area
+as_of: 2026-10-31
+
+baseline:
+  # Common to all five countries, so it does not change the ranking.
+  - fact: "In the euro area the ECB grants credit institution licences on the proposal of the national authority, which is the entry point for the application."
+    source: https://www.bankingsupervision.europa.eu/activities/authorisation/html/index.en.html
+  - fact: "EU law requires a decision within six months of a complete application (twelve at most); the ECB says it usually takes six to twelve months."
+    source: https://www.bankingsupervision.europa.eu/activities/authorisation/html/index.en.html
+  - fact: "CRD minimum initial capital for a credit institution is EUR 5 million. In practice a digital bank needs EUR 20-50 million to fund its J-curve (see bank-model)."
+    source: https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution
+  - fact: "All five are euro-area Banking Union members, so Single Resolution Fund and deposit guarantee contributions apply everywhere and passporting rights are identical."
+    source: https://www.bankingsupervision.europa.eu/about/thessm/html/index.en.html
+
+countries:
+  LT:
+    name: Lithuania
+    supervisor: Lietuvos bankas (Bank of Lithuania)
+    summary: "The most-used fintech licensing route in the EU, with a EUR 1m specialised bank regime and English applications. Revolut's bank is here. Reputation is improving but the supervisor has moved 'from quantity to quality' and fined Revolut in 2025."
+  LV:
+    name: Latvia
+    supervisor: Latvijas Banka (merged with FKTK in 2023)
+    summary: "Home of the team, lowest operating cost, and since 06.01.2026 a EUR 1m specialised credit institution regime that explicitly covers digital-only banks. The regime is untested and the 2018 ABLV case still shapes how partners see Latvian banking."
+  IE:
+    name: Ireland
+    supervisor: Central Bank of Ireland
+    summary: "Deep talent pool and the lowest corporate tax, with a structured three-stage licensing process. But it is the most expensive place to operate, far from Riga, and applications averaged 355 days in 2025."
+  NL:
+    name: Netherlands
+    supervisor: De Nederlandsche Bank (DNB)
+    summary: "Mature supervisor that reviews draft applications in writing, and a large financial labour market. High cost, the highest corporate tax of the five, and a run of large AML enforcement cases (ING, ABN AMRO, bunq)."
+  EE:
+    name: Estonia
+    supervisor: Finantsinspektsioon
+    summary: "Close to Riga and moderately priced, with an 18% bank advance tax. Only one new bank (Holm Bank, 2019) under the SSM, applications must be in Estonian, and the Danske Bank Estonia case is the largest AML scandal in Europe."
+
+criteria:
+  supervisor_fintech:
+    label: Supervisor fintech experience
+    weight: 0.15
+    description: "How many fintech or neobank licences the supervisor has granted recently, and how open it is (innovation hub, sandbox, pre-application dialogue)."
+  licensing_timeline:
+    label: Licensing timeline and predictability
+    weight: 0.15
+    description: "Typical time to a licence and whether the process is published and predictable."
+  capital_entry:
+    label: Capital entry options
+    weight: 0.10
+    description: "Whether a specialised or restricted bank regime allows a lower initial capital than the EUR 5m CRD minimum."
+  language:
+    label: Language and process
+    weight: 0.05
+    description: "Whether the application can be submitted in English."
+  talent:
+    label: Talent availability
+    weight: 0.10
+    description: "Depth of the local pool of banking, risk, AML and IT specialists."
+  operating_cost:
+    label: Operating cost
+    weight: 0.10
+    description: "Labour cost in financial services and prime office rent."
+  tax:
+    label: Tax and levies
+    weight: 0.10
+    description: "Corporate income tax that applies to bank profits, plus bank-specific surcharges and levies."
+  reputation_aml:
+    label: Reputation and AML perception
+    weight: 0.15
+    description: "How correspondent banks, partners and customers are likely to view the jurisdiction, based on recent AML cases and MONEYVAL/FATF status."
+  proximity:
+    label: Proximity to team (Riga)
+    weight: 0.05
+    description: "How easily a Riga-based team can staff and run the licensed entity."
+  market_access:
+    label: Market access and passporting fit
+    weight: 0.05
+    description: "Euro membership and access to target markets through the EU passport."
+
+scores:
+  supervisor_fintech:
+    LT:
+      score: 5
+      rationale: "Licensed Revolut Bank (full licence via the ECB, December 2021) and about eight specialised banks since the first in 2018 (Mano unija), plus PayRay with a full licence. Regulatory sandbox open to newcomers since 2018."
+      sources:
+        - {title: "Lietuvos bankas: banking licence granted to Revolut Bank UAB", url: "https://www.lb.lt/en/news/banking-licence-granted-to-revolut-bank-uab"}
+        - {title: "Lietuvos bankas: Fjord Bank granted a specialised bank licence", url: "https://www.lb.lt/en/news/ab-fjord-bank-granted-a-specialised-bank-licence"}
+        - {title: "Lietuvos bankas: regulatory sandbox launched", url: "https://www.lb.lt/en/news/lithuania-s-financial-regulator-launches-its-regulatory-sandbox"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 3
+      rationale: "INDEXO Banka (ECB licence, May 2024) is the first new Latvian bank in over a decade. Latvijas Banka runs an Innovation Hub, offers pre-licensing consultations and adopted a FinTech strategy for 2026-2027, but has little recent bank-licensing practice."
+      sources:
+        - {title: "Latvijas Banka: INDEXO Banka receives a credit institution licence", url: "https://www.bank.lv/en/news-and-events/news-and-articles/news/16929-as-indexo-banka-receives-a-licence-for-the-operation-of-a-credit-institution"}
+        - {title: "Latvijas Banka: Innovation Hub", url: "https://www.bank.lv/en/cooperation/support-for-fintech-and-innovations/innovation-hub"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 3
+      rationale: "Post-Brexit wave of relocated banks, Innovation Hub and an Innovation Sandbox Programme since 2024. But domestic new-bank licensing is rare. In 2025 the CBI authorised one credit institution, its first Irish-domiciled authorisation since 2019."
+      sources:
+        - {title: "McCann FitzGerald: CBI Authorisations and Gatekeeping Report 2025", url: "https://www.mccannfitzgerald.com/knowledge/financial-services-regulation/the-cbis-authorisations-and-gatekeeping-report-2025-authorisation-activity"}
+        - {title: "Central Bank of Ireland: Innovation Sandbox Programme", url: "https://www.centralbank.ie/regulation/innovation-hub/innovation-sandbox-programme"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 3
+      rationale: "Home of bunq and Knab. ClearBank Europe was licensed in 2024. DNB offers an informal preliminary phase with written feedback on the draft. Few other new bank licences found for 2018-2026."
+      sources:
+        - {title: "FinTech Futures: ClearBank secures ECB credit institution licence", url: "https://www.fintechfutures.com/bankingtech/clearbank-secures-new-credit-institution-licence-from-the-ecb-to-expand-into-europe"}
+        - {title: "DNB: application success factors", url: "https://www.dnb.nl/en/sector-information/open-book-supervision/open-book-supervision-sectors/banks/licence-as-a-bank-overview/application-success-factors/"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 2
+      rationale: "Holm Bank (a consumer lender, 2019) was the first and only Estonian bank licensed under the SSM that we found. The number of banks fell from 9 to 8 in 2025."
+      sources:
+        - {title: "ERR: Holm Bank established as Estonian-capital lender", url: "https://news.err.ee/927029/holm-bank-established-as-estonian-capital-based-lender"}
+        - {title: "Finantsinspektsioon yearbook", url: "https://aastaraamat.fi.ee/en/?p=1000"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  licensing_timeline:
+    LT:
+      score: 4
+      rationale: "Completeness check within 5 business days. Law-firm estimates put a full process at about 9 months (range 6-12). No official average published."
+      sources:
+        - {title: "Lietuvos bankas: authorisation of banks", url: "https://www.lb.lt/en/authorisation-of-banks"}
+        - {title: "Sorainen: bank licensing in Lithuania", url: "https://www.sorainen.com/UserFiles/File/Publications/en%5B1%5D33.html"}
+      last_checked: 2026-10-31
+      needs_check: true
+    LV:
+      score: 3
+      rationale: "Only the CRD statutory default (6 months, 12 at most) applies. No published Latvian average, and only one recent case (INDEXO). The specialised regime has no track record yet."
+      sources:
+        - {title: "ECB: authorisation process", url: "https://www.bankingsupervision.europa.eu/activities/authorisation/html/index.en.html"}
+      last_checked: 2026-10-31
+      needs_check: true
+    IE:
+      score: 4
+      rationale: "The most transparent process of the five. Stages are published (exploratory, draft, formal) and the CBI reports actual times. But that time is long: credit institution applications averaged 355 days in 2025."
+      sources:
+        - {title: "Central Bank of Ireland: credit institution authorisation", url: "https://www.centralbank.ie/regulation/industry-sectors/credit-institutions/Pages/authorisation.aspx"}
+        - {title: "McCann FitzGerald: CBI Authorisations and Gatekeeping Report 2025", url: "https://www.mccannfitzgerald.com/knowledge/financial-services-regulation/the-cbis-authorisations-and-gatekeeping-report-2025-authorisation-activity"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 3
+      rationale: "Statutory period is 26 weeks from a formal application, but DNB says the total 'tends to be longer'. ClearBank's licence took about 18 months."
+      sources:
+        - {title: "DNB: application process and timeline", url: "https://www.dnb.nl/en/sector-information/open-book-supervision/open-book-supervision-sectors/banks/licence-as-a-bank-overview/application-process-timeline/"}
+        - {title: "Osborne Clarke: ClearBank Europe licence", url: "https://osborneclarke.com/node/24323"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 3
+      rationale: "FI states about 6-12 months, which is the CRD default. Only one recent precedent."
+      sources:
+        - {title: "Finantsinspektsioon: operating licence of a credit institution", url: "https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  capital_entry:
+    LT:
+      score: 5
+      rationale: "Specialised bank licence with EUR 1m initial capital (full bank EUR 5m). It is the regime most fintech banks in Lithuania have used."
+      sources:
+        - {title: "Lietuvos bankas: authorisation of banks", url: "https://www.lb.lt/en/authorisation-of-banks"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 5
+      rationale: "Specialised credit institution with at least EUR 1m initial capital, in force since 06.01.2026. One qualifying condition is that services are provided only digitally, which fits Bank X. Prudential requirements are the same as for a full bank."
+      sources:
+        - {title: "Kredītiestāžu likums (Credit Institutions Law), Art. 21(1)", url: "https://likumi.lv/ta/id/365487-print"}
+        - {title: "LV portāls: specialised credit institutions with reduced initial capital", url: "https://lvportals.lv/skaidrojumi/384658-noteikts-tiesiskais-regulejums-specializetajam-kreditiestadem-ar-samazinatu-sakotnejo-kapitalu-2026"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 2
+      rationale: "No reduced-capital bank regime found. Only the EUR 5m CRD minimum applies."
+      sources:
+        - {title: "Central Bank of Ireland: credit institution authorisation", url: "https://www.centralbank.ie/regulation/industry-sectors/credit-institutions/Pages/authorisation.aspx"}
+      last_checked: 2026-10-31
+      needs_check: true
+    NL:
+      score: 2
+      rationale: "No reduced-capital bank regime found (DNB lists a partial licence, which is not a lower-capital route). Only the EUR 5m CRD minimum applies."
+      sources:
+        - {title: "DNB: licence as a bank", url: "https://www.dnb.nl/en/sector-information/open-book-supervision/open-book-supervision-sectors/banks/licence-as-a-bank-overview/application-success-factors/"}
+      last_checked: 2026-10-31
+      needs_check: true
+    EE:
+      score: 2
+      rationale: "FI requires paid-up share capital of at least EUR 5m. No reduced regime."
+      sources:
+        - {title: "Finantsinspektsioon: operating licence of a credit institution", url: "https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  language:
+    LT:
+      score: 5
+      rationale: "Lietuvos bankas accepts applications in Lithuanian or English."
+      sources:
+        - {title: "Lietuvos bankas: authorisation application", url: "https://www.lb.lt/en/authorisation-application"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 3
+      rationale: "No official rule found on English applications. The draft licensing regulation has no language clause. Consultancies say English is widely accepted, but some forms are in Latvian."
+      sources:
+        - {title: "Latvijas Banka: draft credit institution licensing regulation", url: "https://www.bank.lv/images/pielikumi/tiesibu-akti/projekti/NOT_Kredit_LIC.pdf"}
+      last_checked: 2026-10-31
+      needs_check: true
+    IE:
+      score: 5
+      rationale: "English is the working and official language of the CBI."
+      sources:
+        - {title: "Central Bank of Ireland: credit institution authorisation", url: "https://www.centralbank.ie/regulation/industry-sectors/credit-institutions/Pages/authorisation.aspx"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 4
+      rationale: "Applications and correspondence with DNB run mainly in English, according to Chambers. DNB's own page does not state it."
+      sources:
+        - {title: "Chambers: Banking Regulation 2026, Netherlands", url: "https://practiceguides.chambers.com/practice-guides/banking-regulation-2026/netherlands"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 2
+      rationale: "The application must be in Estonian, or Estonian and English in parallel. Other documents can be in English only if FI agrees."
+      sources:
+        - {title: "Finantsinspektsioon: operating licence of a credit institution", url: "https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  talent:
+    LT:
+      score: 4
+      rationale: "248 fintech companies with about 7,800 employees (2025). Large operations and technology centres in Vilnius (Western Union, Nasdaq, SEB, Revolut)."
+      sources:
+        - {title: "Invest Lithuania: Fintech Overview 2025-2026", url: "https://investlithuania.com/fintech-overview-2026/"}
+        - {title: "Invest Lithuania: Western Union", url: "https://investlithuania.com/success-story/western-union"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 3
+      rationale: "126 fintech companies (2024) and the SEB Global Services centre. A smaller pool than Vilnius, but the team is already here."
+      sources:
+        - {title: "business.gov.lv: Fintech Latvia, 127 companies", url: "https://business.gov.lv/en/news/fintech-latvia-127-companies-91-million-taxes-and-ambition-grow-global-markets"}
+        - {title: "Invest in Latvia: SEB Global Services", url: "https://investinlatvia.org/en/success-stories/stories/seb-global-services"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 5
+      rationale: "About 600 international financial services firms with about 60,100 employees (end-2024), and many banks that relocated after Brexit."
+      sources:
+        - {title: "Government of Ireland: Ireland for Finance Action Plan 2025", url: "https://assets.ireland.ie/documents/2._Update_to_Ireland_For_Finance_AP_2025_web.pdf"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 5
+      rationale: "Large domestic banking sector (ING, Rabobank, ABN AMRO) and fintech ecosystem around Amsterdam. Financial-sector headcount and fintech counts were not verified from a primary source."
+      sources:
+        - {title: "CBS StatLine 85919ENG: wages and employment by industry", url: "https://www.cbs.nl/en-gb/figures/detail/85919ENG"}
+      last_checked: 2026-10-31
+      needs_check: true
+    EE:
+      score: 3
+      rationale: "Strong tech talent (Wise's largest office, built for 2,200+ people) but a small banking labour market. Current fintech counts are not verified."
+      sources:
+        - {title: "Wise newsroom: new Tallinn office", url: "https://newsroom.wise.com/en-CEU/247649-wise-expands-in-london-and-tallinn-with-new-office-moves-into-spaces-built-for-growth"}
+      last_checked: 2026-10-31
+      needs_check: true
+
+  operating_cost:
+    LT:
+      score: 5
+      rationale: "Labour cost in finance EUR 28.7/hour (Eurostat 2025). Vilnius prime office EUR 19-22/m2/month (Newsec Q1 2026)."
+      sources:
+        - {title: "Eurostat lc_lci_lev: hourly labour cost 2025", url: "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_lev/default/table"}
+        - {title: "Newsec: Baltic Office Outlook Q1 2026", url: "https://www.newsec.lt/insights/reports/baltic-office-outlook-2026-q1"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 5
+      rationale: "Lowest of the five. Labour cost in finance EUR 27.8/hour (Eurostat 2025). Riga prime office EUR 16-21/m2/month (Newsec Q1 2026)."
+      sources:
+        - {title: "Eurostat lc_lci_lev: hourly labour cost 2025", url: "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_lev/default/table"}
+        - {title: "Newsec: Baltic Office Outlook Q1 2026", url: "https://www.newsec.lt/insights/reports/baltic-office-outlook-2026-q1"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 1
+      rationale: "Labour cost in finance EUR 62.3/hour, more than twice the Baltic level (Eurostat 2025). Dublin prime office about EUR 60/m2/month (CBRE, EUR 67.50 per sq ft per year, Q2 2026)."
+      sources:
+        - {title: "Eurostat lc_lci_lev: hourly labour cost 2025", url: "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_lev/default/table"}
+        - {title: "CBRE Ireland: prime Dublin office rents reach record", url: "https://www.cbre.ie/press-releases/cbre-ireland-prime-dublin-office-rents-reach-record"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 1
+      rationale: "Highest whole-economy labour cost of the five at EUR 47.9/hour (Eurostat 2025; the finance-sector figure is confidential). Finance-sector pay is about EUR 95k per FTE (CBS 2025). Amsterdam Zuidas prime office above EUR 650/m2/year, about EUR 54/month (Knight Frank)."
+      sources:
+        - {title: "Eurostat lc_lci_lev: hourly labour cost 2025", url: "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_lev/default/table"}
+        - {title: "CBS StatLine 85919ENG", url: "https://www.cbs.nl/en-gb/figures/detail/85919ENG"}
+        - {title: "Knight Frank: Dutch Office Market Report 2026", url: "https://content.knightfrank.com/research/233/documents/en/dutch-office-market-report-2026-12805.pdf"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 4
+      rationale: "Labour cost in finance EUR 35.1/hour (Eurostat 2025), about a quarter above Riga. Tallinn prime office EUR 17-24/m2/month (Newsec Q1 2026)."
+      sources:
+        - {title: "Eurostat lc_lci_lev: hourly labour cost 2025", url: "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_lev/default/table"}
+        - {title: "Newsec: Baltic Office Outlook Q1 2026", url: "https://www.newsec.lt/insights/reports/baltic-office-outlook-2026-q1"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  tax:
+    LT:
+      score: 3
+      rationale: "17% standard corporate income tax plus a 5 pp surcharge on bank profits above EUR 2m, so 22% in total from 2026. The temporary solidarity contribution expired at the end of 2025. A draft raising the surcharge to 10% (XVP-973) was under review; its outcome is not verified."
+      sources:
+        - {title: "PwC Worldwide Tax Summaries: Lithuania", url: "https://taxsummaries.pwc.com/lithuania/corporate/taxes-on-corporate-income"}
+        - {title: "RegFollower: Lithuania considers higher tax for banks", url: "https://regfollower.com/lithuania-parliament-considers-higher-corporate-tax-for-banks-credit-institutions/"}
+      last_checked: 2026-10-31
+      needs_check: true
+    LV:
+      score: 3
+      rationale: "Corporate income tax is 20% on distributed profit only, but banks pay an annual 20% surcharge on prior-year profit regardless. A solidarity contribution in 2025-2027 takes 60% of net interest income growth above a 2018-2022 base, with relief for credit growth. How that base applies to a new bank is not verified."
+      sources:
+        - {title: "PwC Worldwide Tax Summaries: Latvia", url: "https://taxsummaries.pwc.com/latvia/corporate/taxes-on-corporate-income"}
+        - {title: "Solidaritātes iemaksas likums", url: "https://likumi.lv/ta/id/368997"}
+      last_checked: 2026-10-31
+      needs_check: true
+    IE:
+      score: 5
+      rationale: "12.5% on trading income (15% Pillar Two only for groups with revenue of EUR 750m or more). The bank levy applies only to legacy state-assisted banks."
+      sources:
+        - {title: "PwC Worldwide Tax Summaries: Ireland", url: "https://taxsummaries.pwc.com/ireland/corporate/taxes-on-corporate-income"}
+        - {title: "Deloitte Ireland: Budget, financial services", url: "https://www.deloitte.com/ie/en/services/tax/perspectives/budget-financial-services.html"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 2
+      rationale: "Highest rate of the five at 25.8% above EUR 200k. The bank tax (0.058% on short-term and 0.029% on long-term debt) applies only above EUR 23.5bn, so not to a new bank for many years."
+      sources:
+        - {title: "Belastingdienst: bankenbelasting", url: "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/overige_belastingen/bankenbelasting"}
+        - {title: "AAFF: Belastingplan 2026", url: "https://www.aaff.nl/node/4097"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 4
+      rationale: "22% on distributed profit (the planned rise to 24% was cancelled), plus an 18% quarterly advance tax on bank profits since 2025. That advance tax is creditable against tax on later distributions."
+      sources:
+        - {title: "EY: significant tax changes in Estonia from 2026", url: "https://taxnews.ey.com/news/2025-2446-estonia-significant-tax-changes-in-estonia-from-2026"}
+        - {title: "EY: Estonia tax changes 2025-2026", url: "https://www.ey.com/en_gl/technical/tax-alerts/estonia-significant-tax-changes-apply-in-2025-2026"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  reputation_aml:
+    LT:
+      score: 3
+      rationale: "Seen as the EU fintech hub, but the volume of licences raised concerns. Lietuvos bankas fined Revolut Bank EUR 3.5m in 2025, its largest fine to date. MONEYVAL follow-up still shows partially compliant ratings; the next evaluation is due in October 2027."
+      sources:
+        - {title: "LRT: Revolut Bank fined EUR 3.5m", url: "https://www.lrt.lt/en/news-in-english/19/2531818/revolut-bank-fined-eur3-5m-for-breaching-anti-money-laundering-rules"}
+        - {title: "FATF: Lithuania MONEYVAL follow-up report 2024", url: "https://www.fatf-gafi.org/en/publications/Mutualevaluations/Lithuania-MONEYVAL-FUR-2024.html"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 2
+      rationale: "The 2018 ABLV case (FinCEN notice, bank wound down) and the non-resident banking legacy still matter to correspondent banks. Latvia avoided the FATF grey list in 2020, and FinCEN later called its measures effective."
+      sources:
+        - {title: "Finanšu ministrija: FinCEN on Latvia's action on ABLV", url: "https://fm.gov.lv/en/article/fincen-latvias-action-address-threat-financial-system-posed-ablv-bank-was-reasonable-responsible-and-effective"}
+        - {title: "Re:Baltica: how Latvia cleaned up its non-resident banks", url: "https://en.rebaltica.lv/2020/09/crime-and-punishment-how-latvia-cleaned-up-its-non-resident-banks/"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 4
+      rationale: "A FATF member and a major financial centre. Recent large enforcement cases involve crypto rather than banks (Coinbase Europe EUR 21.5m, 2025). We did not systematically check for bank AML cases."
+      sources:
+        - {title: "Central Bank of Ireland: enforcement action against Coinbase Europe", url: "https://edit.centralbank.ie/news/article/press-release-enforcement-action-against-coinbase-europe-limited-6-November-2025"}
+      last_checked: 2026-10-31
+      needs_check: true
+    NL:
+      score: 3
+      rationale: "A strong supervisor, but a run of large cases: the ING EUR 775m settlement (2018), ABN AMRO EUR 480m (2021), and a DNB fine on bunq of EUR 2.6m (2025) for customer due diligence failures."
+      sources:
+        - {title: "Openbaar Ministerie: ING pays EUR 775m", url: "https://www.prosecutionservice.nl/latest/news/2018/09/04/ing-pays-775-million-due-to-serious-shortcomings-in-money-laundering-prevention"}
+        - {title: "DNB: fine for bunq for insufficient customer due diligence", url: "https://www.dnb.nl/en/general-news/enforcement-measures-2025/fine-for-bunq-bv-for-insufficient-customer-due-diligence/"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 2
+      rationale: "Danske Bank Estonia had about EUR 200bn of suspicious flows in 2007-2015 and was closed in 2019. The ECB revoked Versobank in 2018. MONEYVAL rated Estonia 'mostly moderately effective' (2022), and it remains in enhanced follow-up."
+      sources:
+        - {title: "Eesti Pank: departure of Danske Estonia", url: "https://www.eestipank.ee/en/press/eesti-pank-says-departure-danske-estonia-will-not-significantly-affect-estonian-economy-19022019"}
+        - {title: "FATF: Estonia follow-up report 2025", url: "https://www.fatf-gafi.org/en/publications/Mutualevaluations/Estonia-FUR-2025.html"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  proximity:
+    LT:
+      score: 4
+      rationale: "Vilnius is about 260 km from Riga (great-circle distance), reachable by a 4-hour drive or a short flight."
+      sources:
+        - {title: "Wikipedia: Vilnius (coordinates)", url: "https://en.wikipedia.org/wiki/Vilnius"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 5
+      rationale: "The team is in Riga."
+      sources:
+        - {title: "Wikipedia: Riga", url: "https://en.wikipedia.org/wiki/Riga"}
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 1
+      rationale: "Dublin is about 1,950 km from Riga, with no realistic same-day commute. Senior management would have to relocate."
+      sources:
+        - {title: "Wikipedia: Dublin (coordinates)", url: "https://en.wikipedia.org/wiki/Dublin"}
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 2
+      rationale: "Amsterdam is about 1,330 km from Riga, with frequent direct flights. Senior management would largely have to be local."
+      sources:
+        - {title: "Wikipedia: Amsterdam (coordinates)", url: "https://en.wikipedia.org/wiki/Amsterdam"}
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 4
+      rationale: "Tallinn is about 280 km from Riga, a 4-hour drive or a short flight."
+      sources:
+        - {title: "Wikipedia: Tallinn (coordinates)", url: "https://en.wikipedia.org/wiki/Tallinn"}
+      last_checked: 2026-10-31
+      needs_check: false
+
+  market_access:
+    # All five are in the euro area and the Banking Union with identical passporting, so this criterion
+    # does not separate them. It is kept so the weight can be raised if a non-euro country is added.
+    LT:
+      score: 4
+      rationale: "Euro area and SSM. A licence passports across the EU/EEA on the same terms as the others."
+      sources: &ssm
+        - {title: "ECB: Single Supervisory Mechanism", url: "https://www.bankingsupervision.europa.eu/about/thessm/html/index.en.html"}
+      last_checked: 2026-10-31
+      needs_check: false
+    LV:
+      score: 4
+      rationale: "Euro area and SSM. A licence passports across the EU/EEA on the same terms as the others."
+      sources: *ssm
+      last_checked: 2026-10-31
+      needs_check: false
+    IE:
+      score: 4
+      rationale: "Euro area and SSM. A licence passports across the EU/EEA on the same terms as the others."
+      sources: *ssm
+      last_checked: 2026-10-31
+      needs_check: false
+    NL:
+      score: 4
+      rationale: "Euro area and SSM. A licence passports across the EU/EEA on the same terms as the others."
+      sources: *ssm
+      last_checked: 2026-10-31
+      needs_check: false
+    EE:
+      score: 4
+      rationale: "Euro area and SSM. A licence passports across the EU/EEA on the same terms as the others."
+      sources: *ssm
+      last_checked: 2026-10-31
+      needs_check: false
