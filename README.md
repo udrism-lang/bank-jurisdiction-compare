@@ -4,7 +4,7 @@ A transparent, source-backed tool that compares five euro-area countries as a ho
 
 Each country gets a score from 1 to 5 on ten weighted criteria. Each score comes with a written rationale, source links and a check date. The tool then asks how much the answer depends on the weights. It does this with 5,000 random weight sets and by finding the weight at which each criterion would change the winner.
 
-It is the companion to [bank-model](https://github.com/udrism-lang/bank-model), which sizes the capital the same bank would need.
+It is the companion to [bank-model](https://github.com/udrism-lang/bank-model), which sizes the capital the same bank would need, and to [neobank-benchmarks](https://github.com/udrism-lang/neobank-benchmarks), which compares it with real banks.
 
 ## Key findings
 
