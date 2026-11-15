@@ -47,6 +47,16 @@ def _pct_label(v: float) -> str:
     return f"{v:.0f}%"
 
 
+def rank_labels(ranked: list[tuple[str, float]]) -> dict[str, str]:
+    """Competition ranks with ties shown as '4=': equal totals (to 2 decimals) share a rank."""
+    labels, shown = {}, [round(v, 2) for _, v in ranked]
+    for i, (code, _) in enumerate(ranked):
+        first = shown.index(shown[i]) + 1
+        tied = shown.count(shown[i]) > 1
+        labels[code] = f"{first}=" if tied else str(first)
+    return labels
+
+
 def first_and_top2(shares: dict[str, list[float]]) -> tuple[dict[str, float], dict[str, float]]:
     return {c: r[0] for c, r in shares.items()}, {c: r[0] + r[1] for c, r in shares.items()}
 
@@ -117,25 +127,35 @@ def write_charts(ds: Dataset, shares: dict[str, list[float]], iterations: int, o
     return files
 
 
-def headline(ds: Dataset, mc: dict[str, float], thresholds: list[dict], iterations: int) -> str:
+def headline(ds: Dataset, mc: dict[str, float], thresholds: list[dict], iterations: int,
+             score_mc: dict[str, float] | None = None) -> str:
     names = _names(ds)
     leader = rank(ds)[0][0]
     top = thresholds[0]
     text = (f"With base weights, {names[leader]} ranks first; {names[leader]} stays first in "
-            f"{mc[leader]:.1%} of {iterations:,} random weight sets.")
+            f"{mc[leader]:.1%} of {iterations:,} random weight sets")
+    if score_mc is not None:
+        text += f" and in {score_mc[leader]:.1%} of {iterations:,} draws with every score moved by -1, 0 or +1"
+    text += "."
     if top["threshold"] is None:
         return text + " No single weight change overturns the leader."
     return text + (f" The decision is most sensitive to {top['label'].lower()}: moving its weight from "
                    f"{top['base_weight']:.0%} to {top['threshold']:.0%} puts {names[top['new_leader']]} first.")
 
 
-def write_markdown(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresholds: list[dict], iterations: int, path: Path) -> None:
+def write_markdown(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresholds: list[dict], iterations: int, path: Path,
+                   score_mc: dict[str, float] | None = None) -> None:
     names = _names(ds)
     ranked = rank(ds)
-    lines = [f"# {ds.title}", "", f"Data as of {ds.as_of}.", "", headline(ds, mc, thresholds, iterations), "",
-             "## Ranking", "", "| Rank | Country | Weighted score | First in random weight sets | First or second |", "|---|---|---|---|---|"]
-    for i, (code, total) in enumerate(ranked, 1):
-        lines.append(f"| {i} | {names[code]} | {total:.2f} | {mc[code]:.1%} | {top2[code]:.1%} |")
+    labels = rank_labels(ranked)
+    smc = score_mc or {}
+    lines = [f"# {ds.title}", "", f"Data as of {ds.as_of}.", "", headline(ds, mc, thresholds, iterations, score_mc), "",
+             "## Ranking", "",
+             "| Rank | Country | Weighted score | First in random weight sets | First or second | First with scores +/-1 |",
+             "|---|---|---|---|---|---|"]
+    for code, total in ranked:
+        s1 = f"{smc[code]:.1%}" if code in smc else "-"
+        lines.append(f"| {labels[code]} | {names[code]} | {total:.2f} | {mc[code]:.1%} | {top2[code]:.1%} | {s1} |")
     lines += ["", "## Weight needed to change the leader", "",
               "| Criterion | Base weight | Leader changes at | New leader |", "|---|---|---|---|"]
     for t in thresholds:
@@ -183,7 +203,8 @@ def _bars(rows: list[tuple[str, float, str, str]], xmax: float) -> str:
     return "".join(out)
 
 
-def write_html(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresholds: list[dict], iterations: int, path: Path) -> None:
+def write_html(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresholds: list[dict], iterations: int, path: Path,
+               score_mc: dict[str, float] | None = None) -> None:
     names = _names(ds)
     ranked = rank(ds)
     e = html.escape
@@ -191,7 +212,7 @@ def write_html(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresh
              f"<meta name='viewport' content='width=device-width,initial-scale=1'><style>{CSS}</style></head>",
              "<body><main class='viz-root'>",
              f"<h1>{e(ds.title)}</h1><p class='muted'>Data as of {e(ds.as_of)}. Scores 1 (weak) to 5 (strong).</p>",
-             f"<p class='lead'>{e(headline(ds, mc, thresholds, iterations))}</p>"]
+             f"<p class='lead'>{e(headline(ds, mc, thresholds, iterations, score_mc))}</p>"]
 
     parts.append("<h2>Weighted score, base weights</h2>")
     parts.append(_bars([(names[c], v, f"{v:.2f}", f"{names[c]}: {v:.2f} of 5") for c, v in ranked], 5))
@@ -202,6 +223,10 @@ def write_html(ds: Dataset, mc: dict[str, float], top2: dict[str, float], thresh
     parts.append(f"<h2>Ranks first or second in {iterations:,} random weight sets</h2>")
     parts.append(_bars([(names[c], top2[c], f"{top2[c]:.1%}", f"{names[c]} in the top two in {top2[c]:.1%} of weight sets")
                         for c, _ in ranked], 1))
+    if score_mc is not None:
+        parts.append(f"<h2>Ranks first in {iterations:,} draws with every score moved by -1, 0 or +1</h2>")
+        parts.append(_bars([(names[c], score_mc[c], f"{score_mc[c]:.1%}",
+                             f"{names[c]} first in {score_mc[c]:.1%} of score draws") for c, _ in ranked], 1))
 
     parts.append("<h2>Scores by criterion</h2><p class='muted'>Hover a cell for the rationale. "
                  "<span class='flag'>*</span> = needs check.</p><table><tr><th>Criterion</th><th>Weight</th>")

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from jurisdiction.robustness import monte_carlo, weight_thresholds
+from jurisdiction.robustness import monte_carlo, score_uncertainty, weight_thresholds
 from jurisdiction.score import load, rank, totals, validate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +63,20 @@ def test_monte_carlo_is_reproducible(ds):
     assert monte_carlo(ds, iterations=300, seed=7) == monte_carlo(ds, iterations=300, seed=7)
 
 
+def test_score_uncertainty_shares_sum_and_reproduce(ds):
+    a = score_uncertainty(ds, iterations=300, seed=7)
+    assert sum(a.values()) == pytest.approx(1.0)
+    assert set(a) == {n.code for n in ds.countries}
+    assert a == score_uncertainty(ds, iterations=300, seed=7)
+
+
+def test_score_uncertainty_clear_leader_always_wins(ds):
+    """A leader scoring 5 everywhere against rivals scoring 1 stays first after any one-point noise."""
+    top = rank(ds)[0][0]
+    strong = replace(ds, scores={k: replace(s, value=5 if k[1] == top else 1) for k, s in ds.scores.items()})
+    assert score_uncertainty(strong, iterations=200)[top] == 1.0
+
+
 def test_validate_catches_bad_data(ds):
     key = next(iter(ds.scores))
     bad = replace(ds, scores={**ds.scores, key: replace(ds.scores[key], value=7, sources=(), needs_check=False)})
@@ -85,3 +99,10 @@ def test_tie_does_not_count_as_overtaking(ds):
     flat = {k: (replace(s, value=4) if k[0] == "market_access" else s) for k, s in ds.scores.items()}
     rows = {t["criterion"]: t for t in weight_thresholds(replace(ds, scores=flat), steps=100)}
     assert rows["market_access"]["threshold"] is None
+
+
+def test_tied_ranks_are_shown_with_equals_sign():
+    from jurisdiction.report import rank_labels
+
+    labels = rank_labels([("LT", 4.15), ("LV", 3.55), ("IE", 3.3), ("EE", 2.85), ("NL", 2.85)])
+    assert labels == {"LT": "1", "LV": "2", "IE": "3", "EE": "4=", "NL": "4="}

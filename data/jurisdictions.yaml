@@ -4,7 +4,7 @@
 # Change weights or scores here, then run: python run.py
 
 title: Where to license a new digital bank in the euro area
-as_of: 2026-10-31
+as_of: 2026-11-15
 
 baseline:
   # Common to all five countries, so it does not change the ranking.
@@ -12,8 +12,8 @@ baseline:
     source: https://www.bankingsupervision.europa.eu/activities/authorisation/html/index.en.html
   - fact: "EU law requires a decision within six months of a complete application (twelve at most); the ECB says it usually takes six to twelve months."
     source: https://www.bankingsupervision.europa.eu/activities/authorisation/html/index.en.html
-  - fact: "CRD minimum initial capital for a credit institution is EUR 5 million. In practice a digital bank needs EUR 20-50 million to fund its J-curve (see bank-model)."
-    source: https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution
+  - fact: "CRD Article 12(1) sets the minimum initial capital of a credit institution at EUR 5 million. Article 12(4) lets a Member State authorise particular categories of credit institutions with less, but not below EUR 1 million; this is the legal basis of the EUR 1m specialised regimes in Lithuania and Latvia. In practice a digital bank needs EUR 20-50 million to fund its J-curve (see bank-model)."
+    source: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32013L0036
   - fact: "All five are euro-area Banking Union members, so Single Resolution Fund and deposit guarantee contributions apply everywhere and passporting rights are identical."
     source: https://www.bankingsupervision.europa.eu/about/thessm/html/index.en.html
 
@@ -25,7 +25,7 @@ countries:
   LV:
     name: Latvia
     supervisor: Latvijas Banka (merged with FKTK in 2023)
-    summary: "Home of the team, lowest operating cost, and since 06.01.2026 a EUR 1m specialised credit institution regime that explicitly covers digital-only banks. The regime is untested and the 2018 ABLV case still shapes how partners see Latvian banking."
+    summary: "Home of the team, lowest operating cost, and since 06.01.2026 a EUR 1m specialised credit institution regime that explicitly covers digital-only banks. The regime is untested and the 2018 ABLV case still shapes how partners see Latvian banking, although MONEYVAL's 2025 evaluation found the AML/CFT system effective overall."
   IE:
     name: Ireland
     supervisor: Central Bank of Ireland
@@ -37,7 +37,7 @@ countries:
   EE:
     name: Estonia
     supervisor: Finantsinspektsioon
-    summary: "Close to Riga and moderately priced, with an 18% bank advance tax. Only one new bank (Holm Bank, 2019) under the SSM, applications must be in Estonian, and the Danske Bank Estonia case is the largest AML scandal in Europe."
+    summary: "Close to Riga and moderately priced, with an 18% bank advance tax. Only two new banks since the SSM began in 2014 (Inbank, 2015; Holm Bank, 2019), applications must be in Estonian, and the Danske Bank Estonia case is the largest AML scandal in Europe."
 
 criteria:
   supervisor_fintech:
@@ -118,11 +118,12 @@ scores:
       needs_check: false
     EE:
       score: 2
-      rationale: "Holm Bank (a consumer lender, 2019) was the first and only Estonian bank licensed under the SSM that we found. The number of banks fell from 9 to 8 in 2025."
+      rationale: "Two new banks since the SSM began in November 2014, both consumer lenders: Inbank (credit institution licence, Finantsinspektsioon register decision of 10.04.2015) and Holm Bank (2019). No new bank since 2019, and the number of banks fell from 9 to 8 in 2025."
       sources:
+        - {title: "Finantsinspektsioon register: AS Inbank, credit institution licence 4.1-1/31 of 10.04.2015", url: "https://subjektid.fi.ee/view/11198/LICENSED_CREDIT_INSTITUTIONS_IN_ESTONIA?lang=en"}
         - {title: "ERR: Holm Bank established as Estonian-capital lender", url: "https://news.err.ee/927029/holm-bank-established-as-estonian-capital-based-lender"}
         - {title: "Finantsinspektsioon yearbook", url: "https://aastaraamat.fi.ee/en/?p=1000"}
-      last_checked: 2026-10-31
+      last_checked: 2026-11-15
       needs_check: false
 
   licensing_timeline:
@@ -142,12 +143,12 @@ scores:
       last_checked: 2026-10-31
       needs_check: true
     IE:
-      score: 4
-      rationale: "The most transparent process of the five. Stages are published (exploratory, draft, formal) and the CBI reports actual times. But that time is long: credit institution applications averaged 355 days in 2025."
+      score: 3
+      rationale: "The most transparent process of the five. Stages are published (exploratory, draft, formal) and the CBI reports actual times. But that time is long: credit institution applications averaged 355 days in 2025, about 12 months and at the top of the CRD range. Scored 3, one below Lithuania (about 9 months): transparency offsets some, but not all, of the longer timeline."
       sources:
         - {title: "Central Bank of Ireland: credit institution authorisation", url: "https://www.centralbank.ie/regulation/industry-sectors/credit-institutions/Pages/authorisation.aspx"}
         - {title: "McCann FitzGerald: CBI Authorisations and Gatekeeping Report 2025", url: "https://www.mccannfitzgerald.com/knowledge/financial-services-regulation/the-cbis-authorisations-and-gatekeeping-report-2025-authorisation-activity"}
-      last_checked: 2026-10-31
+      last_checked: 2026-11-15
       needs_check: false
     NL:
       score: 3
@@ -159,7 +160,7 @@ scores:
       needs_check: false
     EE:
       score: 3
-      rationale: "FI states about 6-12 months, which is the CRD default. Only one recent precedent."
+      rationale: "FI states about 6-12 months, which is the CRD default. Only one precedent since 2015 (Holm Bank, 2019)."
       sources:
         - {title: "Finantsinspektsioon: operating licence of a credit institution", url: "https://fi.ee/en/banking-and-credit/applying-activity-licences/operating-licence-credit-institution"}
       last_checked: 2026-10-31
@@ -325,19 +326,20 @@ scores:
   tax:
     LT:
       score: 3
-      rationale: "17% standard corporate income tax plus a 5 pp surcharge on bank profits above EUR 2m, so 22% in total from 2026. The temporary solidarity contribution expired at the end of 2025. A draft raising the surcharge to 10% (XVP-973) was under review; its outcome is not verified."
+      rationale: "17% standard corporate income tax plus a 5 pp surcharge on bank profits above EUR 2m, so 22% in total from 2026 (PwC, last reviewed 01.10.2026, still shows 22%). The temporary solidarity contribution expired at the end of 2025. Bill XVP-973, registered on 10.11.2025, would raise the surcharge from 5% to 10% (27% in total) from 01.03.2026; adoption not confirmed as of 15.11.2026."
       sources:
         - {title: "PwC Worldwide Tax Summaries: Lithuania", url: "https://taxsummaries.pwc.com/lithuania/corporate/taxes-on-corporate-income"}
-        - {title: "RegFollower: Lithuania considers higher tax for banks", url: "https://regfollower.com/lithuania-parliament-considers-higher-corporate-tax-for-banks-credit-institutions/"}
-      last_checked: 2026-10-31
+        - {title: "RegFollower: Lithuania considers higher tax for banks (XVP-973)", url: "https://regfollower.com/lithuania-parliament-considers-higher-corporate-tax-for-banks-credit-institutions/"}
+      last_checked: 2026-11-15
       needs_check: true
     LV:
       score: 3
-      rationale: "Corporate income tax is 20% on distributed profit only, but banks pay an annual 20% surcharge on prior-year profit regardless. A solidarity contribution in 2025-2027 takes 60% of net interest income growth above a 2018-2022 base, with relief for credit growth. How that base applies to a new bank is not verified."
+      rationale: "Corporate income tax is 20% on distributed profit only. Since 2024 (PwC) banks also pay an annual 20% tax surcharge (nodokļa piemaksa) on prior-year after-tax profit, whether or not they distribute it. It works as an advance: surcharge already paid reduces the tax on later dividends (UIN likums Art. 4.1 and Art. 17(7.1)), so it mainly affects timing and cash. A solidarity contribution in 2025-2027 applies only to net interest income that exceeds the bank's 2018-2022 average by more than 50%; the excess is charged at 60% (PwC), with up to 100% relief for credit growth. We found no rule on how the 2018-2022 base works for a bank that did not exist then."
       sources:
-        - {title: "PwC Worldwide Tax Summaries: Latvia", url: "https://taxsummaries.pwc.com/latvia/corporate/taxes-on-corporate-income"}
+        - {title: "Uzņēmumu ienākuma nodokļa likums, Art. 4.1 and 17", url: "https://likumi.lv/ta/id/292700-uznemumu-ienakuma-nodokla-likums"}
         - {title: "Solidaritātes iemaksas likums", url: "https://likumi.lv/ta/id/368997"}
-      last_checked: 2026-10-31
+        - {title: "PwC Worldwide Tax Summaries: Latvia", url: "https://taxsummaries.pwc.com/latvia/corporate/taxes-on-corporate-income"}
+      last_checked: 2026-11-15
       needs_check: true
     IE:
       score: 5
@@ -374,12 +376,14 @@ scores:
       last_checked: 2026-10-31
       needs_check: false
     LV:
-      score: 2
-      rationale: "The 2018 ABLV case (FinCEN notice, bank wound down) and the non-resident banking legacy still matter to correspondent banks. Latvia avoided the FATF grey list in 2020, and FinCEN later called its measures effective."
+      score: 3
+      rationale: "Latvia was the first country evaluated in MONEYVAL's 6th round, and the first evaluation worldwide under the FATF 2022 methodology. The report was adopted at the joint FATF/MONEYVAL plenary in June 2025 and published on 19.02.2026. It found high or substantial effectiveness in ten of the eleven Immediate Outcomes (only IO.4 moderate), and Latvia is in regular follow-up. It is not higher because the 2018 ABLV case (FinCEN notice, bank wound down) and the non-resident banking legacy still matter to correspondent banks. Latvia avoided the FATF grey list in 2020, and FinCEN later called its measures effective."
       sources:
+        - {title: "MONEYVAL: 6th round mutual evaluation report on Latvia (2026)", url: "https://rm.coe.int/moneyval-2026-2-mer-latvia-en/48802ab1ea"}
+        - {title: "FIU Latvia: Latvia's AML/CFT system internationally recognised as overall effective", url: "https://fid.gov.lv/en/news/latvias-amlcft-system-internationally-recognised-as-overall-effective"}
+        - {title: "eucrim: MONEYVAL sixth-round report on Latvia", url: "https://eucrim.eu/news/moneyval-sixth-round-mutual-evaluation-report-on-latvia/"}
         - {title: "Finanšu ministrija: FinCEN on Latvia's action on ABLV", url: "https://fm.gov.lv/en/article/fincen-latvias-action-address-threat-financial-system-posed-ablv-bank-was-reasonable-responsible-and-effective"}
-        - {title: "Re:Baltica: how Latvia cleaned up its non-resident banks", url: "https://en.rebaltica.lv/2020/09/crime-and-punishment-how-latvia-cleaned-up-its-non-resident-banks/"}
-      last_checked: 2026-10-31
+      last_checked: 2026-11-15
       needs_check: false
     IE:
       score: 4
